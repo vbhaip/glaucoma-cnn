@@ -26,7 +26,8 @@ model.add(Dropout(0.3))
 model.add(Dense(2))
 model.add(Activation('softmax'))
 
-#model.load_weights("third_try.h5")
+model.load_weights("third_try.h5")
+
 opt = optimizers.SGD(lr=0.01, momentum=0.5)
 model.compile(loss='categorical_crossentropy',
               optimizer='nadam',
@@ -56,8 +57,45 @@ validation_generator = testdatagen.flow_from_directory(
 
 model.fit_generator(
         train_generator,
-        epochs=10,
-        validation_data=validation_generator)
+        epochs=1)
 
+def format_image(path):
+    img = load_img(path, target_size=(width, height), grayscale=True)
+    img = img_to_array(img)
+    img = img.reshape((1,) + img.shape)
+    return img
 
-model.save_weights('third_try.h5')
+print(train_generator.class_indices)
+print(validation_generator.class_indices)
+
+print("TRAIN\n______________________")
+
+print("Glauc")
+
+print(model.predict(format_image("rim-flow-data/train/glaucoma/G-1-L.jpg")))
+print(model.predict(format_image("rim-flow-data/train/glaucoma/G-2-R.jpg")))
+print(model.predict(format_image("rim-flow-data/train/glaucoma/G-3-R.jpg")))
+
+print()
+
+print("Health")
+print(model.predict(format_image("rim-flow-data/train/healthy/N-1-L.jpg")))
+print(model.predict(format_image("rim-flow-data/train/healthy/N-2-R.jpg")))
+print(model.predict(format_image("rim-flow-data/train/healthy/N-4-R.jpg")))
+
+print()
+print()
+
+print("VALIDATION\n______________________")
+
+print("Glauc")
+print(model.predict(format_image("rim-flow-data/validation/glaucoma/G-7-L.jpg")))
+print(model.predict(format_image("rim-flow-data/validation/glaucoma/G-13-R.jpg")))
+print(model.predict(format_image("rim-flow-data/validation/glaucoma/G-18-R.jpg")))
+
+print()
+
+print("Health")
+print(model.predict(format_image("rim-flow-data/validation/healthy/N-3-L.jpg")))
+print(model.predict(format_image("rim-flow-data/validation/healthy/N-6-R.jpg")))
+print(model.predict(format_image("rim-flow-data/validation/healthy/N-11-L.jpg")))
