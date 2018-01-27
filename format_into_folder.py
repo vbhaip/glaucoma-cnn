@@ -4,7 +4,7 @@
 import os, random
 from shutil import copy
 from dotenv import load_dotenv
-
+from PIL import Image
 load_dotenv(".config.env")
 glauc_path = os.getenv("GLAUC_PATH")
 health_path = os.getenv("HEALTH_PATH")
@@ -24,15 +24,23 @@ health_test = random.sample(health_dir, int(len(health_dir)/5))
 glauc_train = list(set(glauc_train).difference(set(glauc_test)))
 health_train = list(set(health_train).difference(set(health_test)))
 
+def crop(image_path, loc):
+    image_obj = Image.open(image_path)
+    cropped_image = image_obj.crop((0,0,image_obj.size[0]/2,image_obj.size[1]))
+    cropped_image.save(loc)
 
 for x in glauc_train:
-    copy(glauc_path + '/' + x, dst + '/train/glaucoma/')
+    crop(glauc_path + '/' + x, dst + '/train/glaucoma/' + x)
+    #copy(glauc_path + '/' + x, dst + '/train/glaucoma/')
 
 for x in glauc_test:
-    copy(glauc_path + '/' + x, dst + '/validation/glaucoma')
+    crop(glauc_path + '/' + x, dst + '/validation/glaucoma/' + x)
+    #copy(glauc_path + '/' + x, dst + '/validation/glaucoma')
 
 for x in health_train:
-    copy(health_path + '/' + x, dst + '/train/healthy')
+    crop(health_path + '/' + x, dst + '/train/healthy/' + x)
+    #copy(health_path + '/' + x, dst + '/train/healthy')
 
 for x in health_test:
-    copy(health_path + '/' + x, dst + '/validation/healthy')
+    crop(health_path + '/' + x, dst + '/validation/healthy/' + x)
+    #copy(health_path + '/' + x, dst + '/validation/healthy')

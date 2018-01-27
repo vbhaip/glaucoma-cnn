@@ -36,7 +36,7 @@ model.add(Activation('relu'))
 model.add(Dense(2))
 model.add(Activation('softmax'))
 
-#model.load_weights("third_try.h5")
+model.load_weights("sixth_try.h5")
 
 #model = VGG16(weights='imagenet', include_top=True)
 #x = Dense(2, activation='softmax', name='predictions')(model.layers[-2].output)
@@ -72,11 +72,11 @@ validation_generator = testdatagen.flow_from_directory(
 
 model.fit_generator(
         train_generator,
-        epochs=15,
+        epochs=40,
         validation_data=validation_generator)
 
 
-model.save_weights('sixth_try.h5')
+model.save_weights('seventh_try.h5')
 
 #fifth_try - 61.29%
 #sixth_try - 67%
