@@ -36,7 +36,7 @@ model.add(Activation('relu'))
 model.add(Dense(2))
 model.add(Activation('softmax'))
 
-#model.load_weights("sixth_try.h5")
+model.load_weights("eighth_try.h5")
 
 # model = VGG16(weights='imagenet', include_top=True)
 # x = Dense(2, activation='softmax', name='predictions')(model.layers[-2].output)
@@ -45,7 +45,6 @@ model.add(Activation('softmax'))
 # model = Model(input=model.input, output=x)
 #model.summary()
 
-opt = optimizers.SGD(lr=0.95)
 model.compile(loss='categorical_crossentropy',
               optimizer='adadelta',
               metrics=['accuracy'])
