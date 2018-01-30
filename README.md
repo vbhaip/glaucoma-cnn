@@ -17,14 +17,11 @@ The visualization was done in the file cnnvisualizer.py. It generated saliency m
 
 #### Example CAM Images:
 
-</br>
 **Glaucoma:**
-</br>
-![Alt text](/layer-genimages/layer_2/cam/glaucoma/G-1-L.jpg)
+![Glaucoma Image](layer-genimages/layer_2/cam/glaucoma/G-1-L.jpg)
 
-</br>
 **Healthy:**
-![Alt text](/layer-genimages/layer_2/cam/healthy/N-1-L.jpg)
+![Healthy Image](/layer-genimages/layer_2/cam/healthy/N-1-L.jpg)
 
 
 *Note that these images were from the 2nd layer and are respectively the G-1-L.jpg image and the N-1-L.jpg image from the training phase.*
